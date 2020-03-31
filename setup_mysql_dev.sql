@@ -1,0 +1,5 @@
+-- This script prepares a mySQL server for the project
+CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
+CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
+GRANT ALL PRIVILEGES ON *.* TO 'hbnb_dev'@'localhost';
+GRANT SELECT PRIVILEGES ON performance_schema.* TO 'hbnb_dev'@'localhost';
