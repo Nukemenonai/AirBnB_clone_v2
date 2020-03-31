@@ -26,10 +26,10 @@ class FileStorage:
             returns a list of objects of the same class
         """
         if cls:
-            objects = []
-            for key, value in self.__objects:
-                if key == cls:
-                    objects.append(value)
+            objects = {}
+            for key, value in self.__objects.items():
+                if type(value) == cls:
+                    objects[key] = value
             return objects
         else:
             return self.__objects
@@ -66,7 +66,8 @@ class FileStorage:
     def delete(self, obj=None):
         """ deletes object from __objects if it's inside
         """
-        if obj in self.__objects:
-            del self.__objects[obj]
+        key = "{}.{}".format(type(obj).__name__, obj.id)
+        if key in self.__objects.keys():
+            del self.__objects[key]
         else:
             pass
