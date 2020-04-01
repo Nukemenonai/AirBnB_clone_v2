@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 """This is the place class"""
-from models.base_model import BaseModel
-from sqlalchemy import Table, Column, Integer, Float, String, ForeignKey
 
+from models.base_model import BaseModel, Base
+from sqlalchemy import Table, Column, Integer, Float, String, ForeignKey
+from sqlalchemy.orm import relationship, backref
 
 place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), primary_key=True,
-                             ForeignKey('places.id'), nullable=False),
-                      Column('amenity_id', String(60), primary_key=True,
-                             ForeignKey('amenities.id'), nullable=False)
+                      Column('place_id', String(60), ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60), ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False)
 )
 
-
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
         city_id: city id
@@ -27,9 +27,10 @@ class Place(BaseModel):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
+
     __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-    user_id = Column(String(60), ForeingKey('users.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024), nullable=False)
     number_rooms = Column(Integer, default=0, nullable=False)
@@ -44,6 +45,9 @@ class Place(BaseModel):
 
     @property
     def reviews(self):
-        """ getter property for reviews """
+        """getter property for reviews"""
         reviews = storage.all(Review)
         return [n for n in reviews.values() if n.place == self.id]
+    @property
+    def amenities(self):
+        amenity = storage.all(Amenity)
