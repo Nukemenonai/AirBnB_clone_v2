@@ -4,7 +4,8 @@ from models.base_model import BaseModel, Base
 from models.city import City
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
-import storage
+from os import getenv
+import models
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -13,9 +14,10 @@ class State(BaseModel, Base):
     """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state", cascade='all, delete')
 
+
+    cities = relationship("City", backref="state", cascade='all, delete')
     @property
     def cities(self):
-        allcities = storage.all(City)
+        allcities = models.storage.all(City)
         return [n for n in allcities.values() if n.state_id == self.id]
