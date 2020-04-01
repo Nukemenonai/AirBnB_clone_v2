@@ -14,9 +14,9 @@ class BaseModel:
     """
 
     id = Column(String(60), unique=True, primary_key=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow(),
+    created_at = Column(DateTime, default=datetime.utcnow(),
                         nullable=False)
-    updated_at = Column(DateTime, default=datetime.datetime.utcnow(),
+    updated_at = Column(DateTime, default=datetime.utcnow(),
                         nullable=False)
 
     def __init__(self, *args, **kwargs):
@@ -73,7 +73,7 @@ class BaseModel:
         my_dict["updated_at"] = self.updated_at.isoformat()
         return my_dict
 
-    del delete(self):
+    def delete(self):
         """ deletes the current instance from models.storage
         """
         models.storage.delete(self)
