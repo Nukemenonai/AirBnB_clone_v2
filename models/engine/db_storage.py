@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 class DBStorage:
 
     __engine = None
@@ -26,6 +27,7 @@ class DBStorage:
                                       pool_pre_ping=True)
         if getenv('HBNB_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
+
     def all(self, cls=None):
         classes = [User, State, City, Amenity, Place, Review]
         dictionary = {}
@@ -42,10 +44,13 @@ class DBStorage:
                     dictionary[key] = results
                     print(dictionary)
         return dictionary
+
     def new(self, obj):
         self.__session.add(obj)
+
     def save(self):
         self.__session.commit()
+
     def delete(self, obj=None):
         if obj:
             self.__session.delete(obj)

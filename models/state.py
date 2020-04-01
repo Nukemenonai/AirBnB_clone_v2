@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship, backref
 from os import getenv
 import models
 
+
 class State(BaseModel, Base):
     """This is the class for State
     Attributes:
@@ -15,8 +16,8 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
 
-
     cities = relationship("City", backref="state", cascade='all, delete')
+
     @property
     def cities(self):
         allcities = models.storage.all(City)
