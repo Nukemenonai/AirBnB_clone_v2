@@ -38,9 +38,7 @@ class DBStorage:
             for clss in classes:
                 queries = self.__session.query(clss).all()
                 for results in queries:
-                    print(results)
                     key = "{}.{}".format(type(results).__name__, results.id)
-                    print(key)
                     dictionary[key] = results
                     print(dictionary)
         return dictionary
