@@ -4,6 +4,7 @@
 from models.base_model import BaseModel, Base
 from models.state import State
 from models.city import City
+from models.user import User
 from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -28,7 +29,7 @@ class DBStorage:
 
     def all(self, cls=None):
         """ this module returns all instances of a Class"""
-        classes = [State, City]
+        classes = [State, City, User]
         dictionary = {}
 
         if cls in classes and cls is not None:
