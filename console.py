@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
                 for item in lst:
                     if item[1].isdigit():
                         item[1] = eval(item[1])
-                    setattr(obj, item[0], item[1])
+                    setattr(obj, item[0], item[1].replace('_', ' '))
                 obj.save()
                 print("{}".format(obj.id))
         except SyntaxError:
