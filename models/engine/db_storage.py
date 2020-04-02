@@ -26,10 +26,10 @@ class DBStorage:
                                       format(user, password, host, database),
                                       pool_pre_ping=True)
         if getenv('HBNB_ENV') == "test":
-            Base.metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        classes = [User, State, City, Amenity, Place, Review]
+        classes = [State, City]
         dictionary = {}
         if cls:
             queries = self.__session.query(eval(cls)).all()
@@ -42,7 +42,6 @@ class DBStorage:
                 for results in queries:
                     key = "{}.{}".format(type(results).__name__, results.id)
                     dictionary[key] = results
-                    print(dictionary)
         return dictionary
 
     def new(self, obj):
