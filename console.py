@@ -50,9 +50,12 @@ class HBNBCommand(cmd.Cmd):
                 obj = eval("{}()".format(my_list[0]))
                 lst = [n.split("=") for n in my_list if len(n.split("=")) == 2]
                 for item in lst:
-                    if item[1].isdigit():
+                    item[1] = item[1].replace('_', ' ')
+                    try:
                         item[1] = eval(item[1])
-                    setattr(obj, item[0], item[1].replace('_', ' '))
+                    except Exception:
+                        pass
+                    setattr(obj, item[0], item[1])
                 obj.save()
                 print("{}".format(obj.id))
         except SyntaxError:
