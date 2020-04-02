@@ -39,17 +39,17 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    """
     reviews = relationship('Review', backref='place', cascade='all, delete')
+    """
     amenities = relationship('Amenity', secondary=place_amenity, viewonly=False)
     """
     amenity_ids = []
-    """
     @property
     def reviews(self):
-        getter property for reviews
+        """getter property for reviews"""
         reviews = storage.all(Review)
-        return [n for n in reviews.values() if n.place == self.id]
+        return [n for n in reviews.values() if n.place_id == self.id]
+    """
     @property
     def amenities(self):
         """ """
