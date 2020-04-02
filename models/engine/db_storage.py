@@ -42,7 +42,6 @@ class DBStorage:
                 for results in queries:
                     key = "{}.{}".format(type(results).__name__, results.id)
                     dictionary[key] = results
-                    print(dictionary)
         return dictionary
 
     def new(self, obj):
