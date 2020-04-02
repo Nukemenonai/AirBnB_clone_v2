@@ -25,7 +25,7 @@ class FileStorage:
         Return:
             returns a list of objects of the same class
         """
-        if cls:
+        if cls is not None:
             objects = {}
             for key, value in self.__objects.items():
                 if type(value) == cls:

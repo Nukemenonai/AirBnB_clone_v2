@@ -77,7 +77,7 @@ class BaseModel:
         try:
             del my_dict['_sa_instance_state']
         except KeyError:
-            print("the key: _sa_instance_state was not found")
+            pass
         return my_dict
 
     def delete(self):

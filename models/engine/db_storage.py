@@ -2,12 +2,8 @@
 """this cmodule controls the database storage engine  """
 
 from models.base_model import BaseModel, Base
-from models.user import User
 from models.state import State
 from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -34,7 +30,8 @@ class DBStorage:
         """ this module returns all instances of a Class"""
         classes = [State, City]
         dictionary = {}
-        if cls:
+
+        if cls in classes and cls is not None:
             queries = self.__session.query(eval(cls)).all()
             for results in queries:
                 key = "{}.{}".format(type(results), results.id)
