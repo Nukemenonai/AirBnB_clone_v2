@@ -31,7 +31,9 @@ class DBStorage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        """ this module returns all instances of a Class"""
+        """ this module returns all instances of a Class
+        if any is given, otherwise it will return all
+        instances of all classes"""
         classes = [State, City, User, Place, Review, Amenity]
         dictionary = {}
 
