@@ -12,8 +12,8 @@ place_amenity = Table('place_amenity', Base.metadata,
                              primary_key=True, nullable=False),
                       Column('amenity_id', String(60),
                              ForeignKey('amenities.id'),
-                             primary_key=True, nullable=False)
-)
+                             primary_key=True, nullable=False))
+
 
 class Place(BaseModel, Base):
     """This is the class for Place
@@ -50,20 +50,20 @@ class Place(BaseModel, Base):
         amenities = relationship("Amenity",
                                  secondary=place_amenity,
                                  viewonly=False)
+    else:
+        @property
+        def reviews(self):
+            """getter property for reviews"""
+            reviews = models.storage.all(Review)
+            return [n for n in reviews.values() if n.place_id == self.id]
 
-    @property
-    def reviews(self):
-        """getter property for reviews"""
-        reviews = models.storage.all(Review)
-        return [n for n in reviews.values() if n.place_id == self.id]
+        @property
+        def amenities(self):
+            """ getter attribute """
+            return self.amenity_ids
 
-    @property
-    def amenities(self):
-        """ getter attribute """
-        return self.amenity_ids
-
-    @amenities.setter
-    def amenities(self, obj):
-        if (isinstance(obj, models.Amenity) and
-            obj not in self.amenity_ids):
-            self.amenities.append(obj.id)
+        @amenities.setter
+        def amenities(self, obj):
+            """setter attribute  """
+            if (isinstance(obj, Amenity) and obj not in self.amenity_ids):
+                self.amenities.append(obj.id)
