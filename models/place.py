@@ -60,16 +60,10 @@ class Place(BaseModel, Base):
     @property
     def amenities(self):
         """ getter attribute """
-        amidlist = []
-        amenity_dic = models.storage.all(models.Amenity)
-        for key, value in amenity_dic.items():
-            if value.id in self.amenity_ids:
-                amidlist.append(value.id)
-        return amidlist
+        return self.amenity_ids
 
     @amenities.setter
-    def amenities(self, comodidad):
-        if isinstance(comodidad, models.Amenity):
-            self.amenity_ids.append(comodidad.id)
-        else:
-            pass
+    def amenities(self, obj):
+        if isinstance(obj, models.Amenity) and
+        obj not in self.amenity_ids:
+            self.amenities.append(obj.id)
