@@ -67,6 +67,7 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
-            """setter attribute  """
+            """setter attribute which will fill the amenity_ids list with
+            the intended content"""
             if (isinstance(obj, Amenity) and obj not in self.amenity_ids):
                 self.amenities.append(obj.id)
