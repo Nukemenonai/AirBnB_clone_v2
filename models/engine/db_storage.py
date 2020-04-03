@@ -55,7 +55,7 @@ class DBStorage:
         self.__session.add(obj)
 
     def save(self):
-        """ this saves the instance into the database  """
+        """ this saves the instance created into the database"""
         self.__session.commit()
 
     def delete(self, obj=None):
