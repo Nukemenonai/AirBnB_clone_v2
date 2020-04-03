@@ -64,6 +64,6 @@ class Place(BaseModel, Base):
 
     @amenities.setter
     def amenities(self, obj):
-        if isinstance(obj, models.Amenity) and
-        obj not in self.amenity_ids:
+        if (isinstance(obj, models.Amenity) and
+            obj not in self.amenity_ids):
             self.amenities.append(obj.id)
