@@ -59,7 +59,7 @@ class DBStorage:
         self.__session.commit()
 
     def delete(self, obj=None):
-        """ deletes an object from database  """
+        """ deletes an object from database if specified"""
         if obj:
             self.__session.delete(obj)
 
