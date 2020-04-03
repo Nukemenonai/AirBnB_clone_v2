@@ -55,7 +55,8 @@ class Place(BaseModel, Base):
     else:
         @property
         def reviews(self):
-            """getter property for reviews"""
+            """getter property that retrieves a list of places instances
+            based in the id of a place and the review place id"""
             reviews = models.storage.all(Review)
             return [n for n in reviews.values() if n.place_id == self.id]
 
