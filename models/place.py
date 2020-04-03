@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """ getter attribute """
+            """ getter attribute that returns a list of all amenities ids"""
             return self.amenity_ids
 
         @amenities.setter
