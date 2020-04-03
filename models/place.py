@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 """This is the place class"""
 
+import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Table, Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
+from os import environ
 
-"""place_amenity = Table('place_amenity', Base.metadata,
+place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60), ForeignKey('places.id'),
                              primary_key=True, nullable=False),
-                      Column('amenity_id', String(60), ForeignKey('amenities.id'),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
                              primary_key=True, nullable=False)
 )
-"""
+
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -39,19 +42,34 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    reviews = relationship('Review', backref='place', cascade='all, delete')
-    """
-    amenities = relationship('Amenity', secondary=place_amenity, viewonly=False)
-    """
     amenity_ids = []
+    if environ.get('HBNB_TYPE_STORAGE') == "db":
+        reviews = relationship("Review",
+                               backref="place",
+                               cascade="all, delete, delete-orphan")
+        amenities = relationship("Amenity",
+                                 secondary=place_amenity,
+                                 viewonly=False)
+
     @property
     def reviews(self):
         """getter property for reviews"""
-        reviews = storage.all(Review)
+        reviews = models.storage.all(Review)
         return [n for n in reviews.values() if n.place_id == self.id]
-    """
+
     @property
     def amenities(self):
-        """ """
-        amenity = storage.all(Amenity)
-    """
+        """ getter attribute """
+        amlist = []
+        amenity_dic = models.storage.all(models.Amenity)
+        for key, value in amenity_dic.items():
+            if value.id in self.amenity_ids:
+                amlist.append(value)
+        return amlist
+
+    @amenities.setter
+    def amenities(self, comodidad):
+        if isinstance(comodidad, models.Amenity):
+            self.amenity_ids.append(comodidad.id)
+        else:
+            pass

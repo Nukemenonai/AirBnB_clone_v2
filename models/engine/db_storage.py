@@ -7,6 +7,7 @@ from models.city import City
 from models.user import User
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
 from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -31,11 +32,11 @@ class DBStorage:
 
     def all(self, cls=None):
         """ this module returns all instances of a Class"""
-        classes = [State, City, User, Place, Review]
+        classes = [State, City, User, Place, Review, Amenity]
         dictionary = {}
 
-        if cls in classes and cls is not None:
-            queries = self.__session.query(eval(cls)).all()
+        if cls in classes:
+            queries = self.__session.query(cls).all()
             for results in queries:
                 key = "{}.{}".format(type(results), results.id)
                 dictionary[key] = results
