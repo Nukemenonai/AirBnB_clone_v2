@@ -6,7 +6,6 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 
-
 class City(BaseModel, Base):
     """This is the class for City
     Attributes:
