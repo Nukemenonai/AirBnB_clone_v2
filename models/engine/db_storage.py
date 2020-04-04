@@ -34,10 +34,12 @@ class DBStorage:
         """ this module returns all instances of a Class
         if any is given, otherwise it will return all
         instances of all classes"""
+        """if type(cls) == str:
+            cls = eval(cls)"""
         classes = [State, City, User, Place, Review, Amenity]
         dictionary = {}
 
-        if cls in classes:
+        if cls is not None:
             queries = self.__session.query(cls).all()
             for results in queries:
                 key = "{}.{}".format(type(results), results.id)
