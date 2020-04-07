@@ -8,6 +8,5 @@ echo "Holberton School" >> /data/web_static/releases/test/index.html
 ln -s /data/web_static/current /data/web_static/releases/test/
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
-new_str="\tlocation \/hbnb_static\/ {\n\t#alias \/data\/web_static\/current;\n\tautoindex off;\n\t}"
-sed -i "20i\ $new_strcase  in" /etc/nginx/nginx.conf
+sed -i "20i\ \tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current;\n\t\tautoindex off;\n\t}" /etc/nginx/nginx.conf
 sudo service nginx start
