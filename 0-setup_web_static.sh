@@ -4,7 +4,16 @@ sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
-sudo echo "Holberton School" >> /data/web_static/releases/test/index.html
+markup='
+<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>
+'
+sudo echo "$markup" >> /data/web_static/releases/test/index.html
 sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu /data/
 sudo chgrp -R ubuntu /data/
