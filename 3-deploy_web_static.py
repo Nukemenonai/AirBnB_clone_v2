@@ -32,18 +32,18 @@ def do_deploy(archive_path):
     if not path.exists(archive_path):
         return False
 
-    filename = path.splitext(archive_path)[0].split('/')[-1]
+    filename = path.splitext(archive_path)[0]
+    filename = filename.split('/')[-1]
     file_arch = filename + '.tgz'
 
     try:
-        print("Executing task 'deploy'")
         put(archive_path, '/tmp/')
         run('mkdir -p /data/web_static/releases/{:s}'.format(filename))
         run('tar -xzf /tmp/{:s} -C /data/web_static/releases/{:s}'.format(
             file_arch, filename))
         run('rm /tmp/{:s}'.format(file_arch))
         run('mv /data/web_static/releases/{:s}/web_static/*'
-            ' /data/web_static/releases/{:s}'.
+            ' /data/web_static/releases/{:s}/'.
             format(filename, filename))
         run('rm -rf /data/web_static/releases/{:s}/web_static'
             .format(filename))
