@@ -39,7 +39,7 @@ def do_deploy(archive_path):
     file_arch = filename + '.tgz'
 
     try:
-        print("Executing task 'do_deploy'")
+        print("Executing task 'deploy'")
         put(archive_path, '/tmp/')
         run('mkdir -p /data/web_static/releases/{:s}'.format(filename))
         run('tar -xzf /tmp/{:s} -C /data/web_static/releases/{:s}'.format(
