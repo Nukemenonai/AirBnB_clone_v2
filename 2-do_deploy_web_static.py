@@ -19,6 +19,9 @@ def do_pack():
         path = 'versions/web_static_{:s}.tgz'.format(current_time)
         local('mkdir -p ./versions')
         local('tar -cvzf {} web_static'.format(path))
+        bytec = local('wc -c {}'.format(path), capture=True)
+        bytec = bytec.split(' ')[0]
+        print("web_static packed: {} -> {}Bytes".format(path, bytec))
         return path
     except:
         return None
