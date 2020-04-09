@@ -6,7 +6,7 @@ from fabric.api import *
 from datetime import datetime
 from os import path
 
-env.hosts = ['35.231.149.204','34.228.66.193']
+env.hosts = ['35.231.149.204', '34.228.66.193']
 
 
 def do_pack():
@@ -23,11 +23,13 @@ def do_pack():
     except:
         return None
 
+
 def do_deploy(archive_path):
     """
     distributes an archive to my servers
     """
-    if path.exists(archive_path) == False:
+
+    if not path.exists(archive_path):
         return False
 
     filename = path.splitext(archive_path)[0].split('/')[-1]
@@ -43,7 +45,8 @@ def do_deploy(archive_path):
         run('mv /data/web_static/releases/{:s}/web_static/*'
             ' /data/web_static/releases/{:s}'.
             format(filename, filename))
-        run('rm -rf /data/web_static/releases/{:s}/web_static'.format(filename))
+        run('rm -rf /data/web_static/releases/{:s}/web_static'
+            .format(filename))
         run('rm -rf /data/web_static/current')
         run('ln -s /data/web_static/releases/{:s}/ /data/web_static/current'
             .format(filename))
