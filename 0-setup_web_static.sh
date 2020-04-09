@@ -2,6 +2,10 @@
 #this script set up my web server for deplyment
 sudo apt-get update -y
 sudo apt-get install nginx -y
+mkdir -p /data/
+mkdir -p /data/web_static/
+mkdir -p /data/web_static/releases/
+mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 markup='
@@ -13,7 +17,7 @@ markup='
   </body>
 </html>
 '
-echo "$markup" >> /data/web_static/releases/test/index.html
+echo "$markup" > /data/web_static/releases/test/index.html
 ln -s /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
