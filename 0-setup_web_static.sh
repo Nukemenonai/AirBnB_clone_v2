@@ -1,7 +1,7 @@
 #!/bin/bash
 #this script set up my web server for deplyment
-apt-get update -y
-apt-get install nginx -y
+sudo apt-get update -y
+sudo apt-get install nginx -y
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 markup='
