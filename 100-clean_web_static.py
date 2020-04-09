@@ -63,3 +63,12 @@ def deploy():
         return False
 
     return do_deploy(archive_path)
+
+def do_clean(number=0):
+    """
+    deletes out of date archives
+    """
+    if number == 1 or number == 0:
+        outdated = ()
+        run('ls -ltr /versions')
+        
