@@ -20,5 +20,5 @@ markup='
 echo "$markup" > /data/web_static/releases/test/index.html
 sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu:ubuntu /data/
-sed -i "20i\ \tlisten 80 default_server;\n\tlisten [::]:80 default_server;\n\tserver_name _;\n\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current;\n\t\tautoindex off;\n\t}" /etc/nginx/nginx.conf
+sed -i "20i\ \tserver_name _;\n\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current;\n\t\tautoindex off;\n\t}" /etc/nginx/nginx.conf
 service nginx start
