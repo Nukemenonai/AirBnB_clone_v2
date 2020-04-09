@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #this script set up my web server for deplyment
 apt-get update -y
 apt-get install nginx -y
