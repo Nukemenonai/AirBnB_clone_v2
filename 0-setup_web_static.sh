@@ -1,9 +1,9 @@
 #!/bin/bash
 #this script set up my web server for deplyment
-sudo apt-get update -y
-sudo apt-get install nginx -y
-sudo mkdir -p /data/web_static/releases/test/
-sudo mkdir -p /data/web_static/shared/
+apt-get update -y
+apt-get install nginx -y
+mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
 markup='
 <html>
   <head>
@@ -13,9 +13,9 @@ markup='
   </body>
 </html>
 '
-sudo echo "$markup" >> /data/web_static/releases/test/index.html
-sudo ln -s /data/web_static/releases/test/ /data/web_static/current
-sudo chown -R ubuntu /data/
-sudo chgrp -R ubuntu /data/
-sudo sed -i "20i\ \tserver_name _;\n\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current;\n\t\tautoindex off;\n\t}" /etc/nginx/nginx.conf
-sudo service nginx start
+echo "$markup" >> /data/web_static/releases/test/index.html
+ln -s /data/web_static/releases/test/ /data/web_static/current
+chown -R ubuntu /data/
+chgrp -R ubuntu /data/
+sed -i "20i\ \tserver_name _;\n\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current;\n\t\tautoindex off;\n\t}" /etc/nginx/nginx.conf
+service nginx start
