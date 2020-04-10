@@ -72,12 +72,12 @@ def do_clean(number=0):
     """
     deletes everything but the most recent version(s) of deploy
     """
-    if number is 0 or number is 1:
+    if number == 0 or number == 1:
         first_l = local('ls -tr | tail -n 1 | sed -n 1p', capture=True)
         first_r = run('ls -tr | tail -n 1 |  sed -n 1p', capture=True)
         local('rm -v !("{}")'.format(first_l))
         run('rm -v !("{}")'.format(first_r))
-    else if number is 2:
+    else if number == 2:
         first_l = local('ls -tr | tail -n 2 | sed -n 1p', capture=True)
         sec_l = local('ls -tr | tail -n 2 | sed -n 2p', capture=True)
         first_r = run('ls -tr | tail -n 2 | sed -n 1p', capture=True)
