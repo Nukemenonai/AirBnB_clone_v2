@@ -36,6 +36,7 @@ def do_deploy(archive_path):
         return False
 
     filename = path.splitext(archive_path)[0].split('/')[-1]
+    print("My filename is : {}".format(filename))
     file_arch = filename + '.tgz'
 
     try:
