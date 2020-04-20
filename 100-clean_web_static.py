@@ -77,7 +77,7 @@ def do_clean(number=0):
         first_r = run('ls -tr | tail -n 1 |  sed -n 1p', capture=True)
         local('rm -v !("{}")'.format(first_l))
         run('rm -v !("{}")'.format(first_r))
-    else if number == 2:
+    elif number == 2:
         first_l = local('ls -tr | tail -n 2 | sed -n 1p', capture=True)
         sec_l = local('ls -tr | tail -n 2 | sed -n 2p', capture=True)
         first_r = run('ls -tr | tail -n 2 | sed -n 1p', capture=True)
