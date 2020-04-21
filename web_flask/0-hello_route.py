@@ -9,4 +9,5 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_route(strict_slashes=False):
+    """ this handles routing for /  """
     return ("Hello HBNB!")
