@@ -13,3 +13,6 @@ app = Flask(__name__)
 def hello_route(strict_slashes=False):
     """ this handles routing for /  """
     return ("Hello HBNB!")
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
