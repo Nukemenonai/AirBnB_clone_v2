@@ -8,7 +8,7 @@ from models import storage
 from models import State
 
 app = Flask(__name__)
-
+app.url_map.strict_slashes = False
 
 @app.route('/')
 def hello_route(strict_slashes=False):
@@ -57,14 +57,14 @@ def odd_or_even(number, strict_slashes=False):
 
 
 @app.route('/states_list')
-def list_of_states(strict_slashes=False):
+def list_of_states():
     """ This method returns the list of states stored in storage engine"""
-    States = storage.all(State)
+    states = storage.all(State)
     sorted_states = []
-    for state in States:
-        sorted_states.append([States[state].id, States[state].name])
+    for state in states:
+        sorted_states.append([states[state].id, states[state].name])
     sorted_states.sort()
-    return render_template('7-states_list.html', states=sorted_states)
+    return render_template('7-states_list.html', data=sorted_states)
 
 
 @app.teardown_appcontext
