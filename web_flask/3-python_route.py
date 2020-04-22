@@ -3,7 +3,7 @@
 """this file stes up a simple flask server """
 
 
-from flask import Flask
+from flask import Flask, escape
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def hbnb_route(strict_slashes=False):
 
 @app.route('/c/<string:text>')
 def c_is_fun(text, strict_slashes=False):
-    return ("C %s" % text.replace("_", " "))
+    return ("C %s" % escpe(text.replace("_", " ")))
 
 
 @app.route('/python/<string:text>')
