@@ -6,9 +6,9 @@
     <BODY>
         <H1>States</H1>
         <UL>
-	  {% for item in states%}
+	  {%- for item in states %}
 	  <LI>{{ item[0] }}: <B>{{ item[1] }}</B></LI>
-	  {% endfor %}
+	  {%- endfor %}
         </UL>
     </BODY>
 </HTML>
