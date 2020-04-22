@@ -3,7 +3,7 @@
 """this file stes up a simple flask server """
 
 
-from flask import Flask
+from flask import Flask, escape, render_template
 
 app = Flask(__name__)
 
@@ -26,9 +26,11 @@ def c_is_fun(text, strict_slashes=False):
 
 
 @app.route('/python/<string:text>')
-def python_is_cool(text="is cool", strict_slashes=False):
+@app.route('/python/')
+@app.route('/python')
+def python_is_cool(text='is cool', strict_slashes=False):
     """ variable rules for /python"""
-    return ("Python %s" % text.replace("_", " "))
+    return ("Python %s" % escape(text.replace("_", " ")))
 
 
 @app.route('/number/<int:number>')
@@ -40,7 +42,7 @@ def is_it_a_number(number, strict_slashes=False):
 @app.route('/number_template/<int:number>')
 def number_template(number, strict_slashes=False):
     """ displays an html template on a valid number"""
-    return render_template('templates/5-number.html', number=number)
+    return render_template('5-number.html', number=number)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
