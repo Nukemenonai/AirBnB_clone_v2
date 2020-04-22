@@ -28,7 +28,7 @@ def c_is_fun(text, strict_slashes=False):
 @app.route('/python/<string:text>')
 def python_is_cool(text="is cool", strict_slashes=False):
     """ variable rules for /python"""
-    return ("Python %s" % text.replace("_", " "))
+    return ("Python %s" % escape(text.replace("_", " ")))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
