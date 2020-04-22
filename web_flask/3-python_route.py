@@ -26,6 +26,7 @@ def c_is_fun(text, strict_slashes=False):
 
 
 @app.route('/python/<string:text>')
+@app.route('/python/')
 @app.route('/python')
 def python_is_cool(text='is cool', strict_slashes=False):
     """ variable rules for /python"""
