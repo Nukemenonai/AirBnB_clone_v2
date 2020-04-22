@@ -22,8 +22,8 @@ def list_of_states(strict_slashes=False):
 
 
 @app.teardown_appcontext
-def handle_teardown(r_or_exc):
-    """ handles teardown  """
+def handle_teardown(self=None):
+    """ closes the session  """
     storage.close()
 
 
