@@ -75,4 +75,4 @@ class FileStorage:
 
     def close(self):
         """ calls reload """
-        self.reload()
+        reload(self)
