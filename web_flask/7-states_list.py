@@ -8,18 +8,13 @@ from models import storage, State
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/states_list')
+@app.route('/states_list', strict_slashes=False)
 def list_of_states():
     """ This method returns the list of states stored in storage engine"""
-    states = storage.all(State)
-    sorted_states = []
-    for state in states:
-        sorted_states.append([states[state].id, states[state].name])
-    sorted_states.sort()
-    return render_template('7-states_list.html', states=sorted_states)
+    states = sorted(storage.all(State).values(), key=lambda k: k.name)
+    return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
