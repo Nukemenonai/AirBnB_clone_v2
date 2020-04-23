@@ -4,11 +4,11 @@
 
 
 from flask import Flask, escape, render_template
-from models import storage
-from models import State
+from models import storage, State
+
 
 app = Flask(__name__)
-app.url_map.strict_slashes=False
+app.url_map.strict_slashes = False
 
 
 @app.route('/states_list')
@@ -28,5 +28,6 @@ def close(self=None):
     storage.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    """ running the app  """
     app.run(host='0.0.0.0', port='5000')
