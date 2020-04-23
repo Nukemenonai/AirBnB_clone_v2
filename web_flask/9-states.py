@@ -21,20 +21,22 @@ def states_and_state(id=None):
 
     for el in states:
         if id == el.id:
-           state = el
-           status = 1
-           break
+            state = el
+            status = 1
+            break
 
-    status = (2 if id is not None and status == 0 else 0)
     if status == 1:
         cities = sorted(state.cities, key=lambda k: k.name)
         state = state.name
+    else:
+        status = (2 if id is not None else 0)
 
     return render_template('9-states.html',
                            state=state,
                            states=states,
                            cities=cities,
                            status=status)
+
 
 @app.teardown_appcontext
 def close(res_or_exc):
