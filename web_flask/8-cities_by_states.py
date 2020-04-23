@@ -6,7 +6,6 @@
 from flask import Flask, escape, render_template
 from models.state import State
 from models import storage
-from os import environ
 
 app = Flask(__name__)
 
@@ -16,10 +15,11 @@ def cities_by_state():
     """ """
     states = storage.all(State).values()
     states = sorted(states, key=lambda k: k.name)
-    cities = []
+    cbs = []
     for state in states:
-        cities.append([state, sorted(state.cities, key=lambda k: k.name)])
-    return render_template('8-cities_by_states.html', data=cities)
+        cbs.append([state, sorted(state.cities, key=lambda k: k.name)])
+    return render_template('8-cities_by_states.html', data=cbs)
+
 
 @app.teardown_appcontext
 def close(res_or_exc):
