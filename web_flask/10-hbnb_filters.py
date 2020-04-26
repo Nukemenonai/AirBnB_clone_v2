@@ -14,13 +14,13 @@ app = Flask(__name__)
 
 @app.route('/hbnb_filters', strict_slashes=False)
 @app.route('/hbnb_filter/<string:id>')
-def hbnb_filters():
+def hbnb_filters(id=None):
     """ display a developed  index html """
     status = 0
     states = sorted(storage.all(State).values(), key=lambda k: k.name)
     amenities = sorted(storage.all(Amenity).values(), key=lambda k: k.name)
     state = ""
-    cities = sorted(state.cities, key=lambda k: k.name)
+    cities = [[sorted(state.cities, key=lambda k: k.name)] for state in states]
 
     for el in states:
         if id == el.id:
